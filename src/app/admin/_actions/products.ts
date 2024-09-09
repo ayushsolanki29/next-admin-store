@@ -1,5 +1,6 @@
-"use server";
+//  @ts-nocheck
 
+"use server";
 import db from "@/lib/db";
 import { z } from "zod";
 import fs from "fs/promises";

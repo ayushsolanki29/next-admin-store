@@ -2,7 +2,7 @@ import db from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import nodemailer from "nodemailer";
-import { ReceiptEmail, ReceiptEmailHtml } from "@/emails/PurchaseRecepit";
+import {  ReceiptEmailHtml } from "@/emails/PurchaseRecepit";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 export async function POST(req: NextRequest) {
   const event = stripe.webhooks.constructEvent(
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
         },
       },
     });
-    const downloadVerification = await db.downloadVerification.create({
+    await db.downloadVerification.create({
       data: {
         productId,
         expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24),

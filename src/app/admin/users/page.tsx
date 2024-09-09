@@ -15,13 +15,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CheckCircle2, MoreVertical, XCircle } from "lucide-react";
-import Link from "next/link";
-import {
-  ActiveToggleDropdownItem,
-  DeleteDropdownItem,
-} from "../_components/ProductAction";
-import { Separator } from "@/components/ui/separator";
+import {  MoreVertical } from "lucide-react";
+
 
 function getUsers() {
   return db.user.findMany({

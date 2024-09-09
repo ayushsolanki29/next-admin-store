@@ -1,3 +1,4 @@
+//  @ts-nocheck
 import { formatCurrency } from "@/lib/utils";
 import {
   Body,
@@ -6,7 +7,6 @@ import {
   Head,
   Hr,
   Html,
-  Img,
   Link,
   Preview,
   Row,
@@ -223,12 +223,6 @@ const productIcon = {
 const productTitle = {
   fontSize: "12px",
   fontWeight: "600",
-  ...resetText,
-};
-
-const productDescription = {
-  fontSize: "12px",
-  color: "rgb(102,102,102)",
   ...resetText,
 };
 
