@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import db from "@/lib/db";
+import { db }  from "@/lib/db";
 import { formatCurrency } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";

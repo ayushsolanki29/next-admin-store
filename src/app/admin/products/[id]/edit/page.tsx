@@ -1,6 +1,6 @@
 import ProductForm from "@/components/ProductForm";
 import PageHeader from "@/components/ui/PageHeader";
-import db from "@/lib/db";
+import { db }  from "@/lib/db";
 import React from "react";
 
 const EditProduct = async ({ params: { id } }: { params: { id: string } }) => {

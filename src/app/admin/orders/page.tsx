@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import db from "@/lib/db";
+import { db }  from "@/lib/db";
 import { formatCurrency } from "@/lib/utils";
 import {
   DropdownMenu,

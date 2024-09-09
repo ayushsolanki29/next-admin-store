@@ -1,7 +1,7 @@
 import ProductCard, { ProductCardSkeleton } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { cache } from "@/lib/cache";
-import db from "@/lib/db";
+import { db }  from "@/lib/db";
 import { Product } from "@prisma/client";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";

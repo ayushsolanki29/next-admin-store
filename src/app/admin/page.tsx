@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import db from "@/lib/db";
+import { db }  from "@/lib/db";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import React from "react";
 

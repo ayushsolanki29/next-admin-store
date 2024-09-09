@@ -1,6 +1,6 @@
 import ProductCard, { ProductCardSkeleton } from "@/components/ProductCard";
 import React, { Suspense } from "react";
-import db from "@/lib/db";
+import { db }  from "@/lib/db";
 import { cache } from "@/lib/cache";
 
 const getProducts = cache(
