@@ -1,6 +1,9 @@
 //  @ts-nocheck
 
 "use server";
+
+import path from "path";
+import crypto from "crypto";
 import { db } from "@/lib/db";
 import { z } from "zod";
 import fs from "fs/promises";
@@ -58,35 +61,47 @@ export async function addProduct(prevState: unknown, formData: FormData) {
     redirect("/admin/products");
   }
 }
+
 export async function updateProduct(
   id: string,
   prevState: unknown,
   formData: FormData
 ) {
   const result = editSchema.safeParse(Object.fromEntries(formData.entries()));
-  if (result.success === false) {
+  if (!result.success) {
     return result.error.formErrors.fieldErrors;
   }
 
   const data = result.data;
   const product = await db.product.findUnique({ where: { id } });
-  if (product == null) {
+  if (!product) {
     return notFound();
   }
+
+  const productsDir = path.join("public", "products");
+
+  // Ensure the directory exists
+  await fs.mkdir(productsDir, { recursive: true });
 
   let filePath = product.filePath;
   if (data.file && data.file.size > 0) {
     await fs.unlink(product.filePath);
-    filePath = `products/${crypto.randomUUID()}-${data.file.name}`;
+    filePath = path.join(
+      productsDir,
+      `${crypto.randomUUID()}-${data.file.name}`
+    );
     await fs.writeFile(filePath, Buffer.from(await data.file.arrayBuffer()));
   }
 
   let imgPath = product.imagePath;
   if (data.image && data.image.size > 0) {
     await fs.unlink(`public${product.imagePath}`);
-    imgPath = `/products/${crypto.randomUUID()}-${data.image.name}`;
+    imgPath = path.join(
+      "/products",
+      `${crypto.randomUUID()}-${data.image.name}`
+    );
     await fs.writeFile(
-      `public${imgPath}`,
+      path.join("public", imgPath),
       Buffer.from(await data.image.arrayBuffer())
     );
   }
@@ -97,7 +112,7 @@ export async function updateProduct(
       isAvailableForPurchase: false,
       name: data.name,
       description: data.description,
-      priceInCents: data.priceIncents,
+      priceInCents: data.priceInCents,
       imagePath: imgPath,
       filePath,
     },
@@ -109,6 +124,7 @@ export async function updateProduct(
     redirect("/admin/products");
   }
 }
+
 export async function toggleProductAvailability(
   id: string,
   isAvailableForPurchase: boolean
