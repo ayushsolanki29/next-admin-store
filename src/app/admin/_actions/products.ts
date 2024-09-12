@@ -79,7 +79,7 @@ export async function updateProduct(
   }
 
   const productsDir = path.join("public", "products");
-
+//new file
   // Ensure the directory exists
   await fs.mkdir(productsDir, { recursive: true });
 
